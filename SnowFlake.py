@@ -1,14 +1,8 @@
 import pygame
+from UIObject import UIObject
 
-class SnowFlake(object):
+class SnowFlake(UIObject):
 
-    def __init__(self, size):
+    def __init__(self, UI, size):
         ## draw a snowflake using lines and recs
-        self.age = 0
-
-    def print(self, pos, screen):
-        """prints the snowflake on the screen"""
-        pass
-    
-    def timeStep(self):
-        self.age += 1
+        super().__init__(UI)

@@ -15,10 +15,12 @@ class cardUI(object):
         self.size = self.width, self.height = infoObject.current_w, infoObject.current_h
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(self.size, pygame.FULLSCREEN)
+        self.CHRISTMAS_RED = (214,0,28)
+        self.screen.fill(self.CHRISTMAS_RED)
         self.gameObjects = {}
 
         pygame.font.init()
-        self.myfont = pygame.font.SysFont('Tahoma', 20)
+        self.myfont = pygame.font.SysFont('Tahoma', 80)
 
     def mainLoop(self):
         Game = True
@@ -27,8 +29,10 @@ class cardUI(object):
             # Quit game
             for event in pygame.event.get():  # game code that happens when any button is pressed
                 if event.type == MOUSEBUTTONDOWN and event.button == self.LEFT:
-                    if 'merryChristmas' not in self.gameObjects:
+                    if Text.line == 0:
                         self.gameObjects['merryChristmas'] = Text(self, 'Merry Christmas')
+                    elif Text.line == 1:
+                        self.gameObjects['merryChristmas'] = Text(self, 'And a happy New Year')
                     else: 
                         self.closeCard()
                 elif event.type == MOUSEBUTTONDOWN and event.button == self.RIGHT:
