@@ -32,7 +32,14 @@ class cardUI(object):
                     if Text.line == 0:
                         self.gameObjects['merryChristmas'] = Text(self, 'Merry Christmas')
                     elif Text.line == 1:
-                        self.gameObjects['merryChristmas'] = Text(self, 'And a happy New Year')
+                        self.gameObjects['merryChristmas'].remove()
+                        self.gameObjects['happyNewYear'] = Text(self, 'And a happy New Year')
+                    elif Text.line == 2:
+                        self.gameObjects['happyNewYear'].remove()
+                        self.gameObjects['bestWishes'] = Text(self, 'Best Wishes')
+                    elif Text.line == 3:
+                        self.gameObjects['bestWishes'].remove()
+                        self.gameObjects['jazChaz'] = Text(self, 'James and Charlotte')
                     else: 
                         self.closeCard()
                 elif event.type == MOUSEBUTTONDOWN and event.button == self.RIGHT:

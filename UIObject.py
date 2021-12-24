@@ -12,3 +12,9 @@ class UIObject(object):
 
     def animate(self):
         pass
+
+    def remove(self):
+        removeSurface = pygame.Surface((self.surface.get_width(), self.surface.get_height()))
+        removeSurface.fill((214,0,28))
+        self.UI.screen.blit(removeSurface, self.location)
+        self.UI.gameObjects = {key:val for key, val in self.UI.gameObjects.items() if val != self}
