@@ -1,11 +1,12 @@
-import pygame, sys
+import pygame, sys, random
 from Text import Text
 from SnowFlake import SnowFlake
 from pygame.locals import *
 
-class cardUI(object):
+class Card(object):
     LEFT = 1
     RIGHT = 2
+    snowFlakeCount = 0
     def __init__(self):
         pygame.init()
         pygame.mixer.init(frequency=44100, size=-16, channels=2, buffer=512, devicename=None, allowedchanges=AUDIO_ALLOW_FREQUENCY_CHANGE | AUDIO_ALLOW_CHANNELS_CHANGE)
@@ -33,7 +34,7 @@ class cardUI(object):
                         self.gameObjects['merryChristmas'] = Text(self, 'Merry Christmas')
                     elif Text.line == 1:
                         self.gameObjects['merryChristmas'].remove()
-                        self.gameObjects['happyNewYear'] = Text(self, 'And a happy New Year')
+                        self.gameObjects['happyNewYear'] = Text(self, 'And a Happy New Year')
                     elif Text.line == 2:
                         self.gameObjects['happyNewYear'].remove()
                         self.gameObjects['bestWishes'] = Text(self, 'Best Wishes')
@@ -53,6 +54,18 @@ class cardUI(object):
             pygame.display.update()
 
     def everyFrame(self):
+        randSnowFlakes = random.randrange(0,4)
+        if randSnowFlakes < 1:
+            Card.snowFlakeCount += 1 
+            self.gameObjects['snowflake'+str(Card.snowFlakeCount)] = SnowFlake(self, 3)
+        elif randSnowFlakes < 3:
+            Card.snowFlakeCount += 1 
+            self.gameObjects['snowflake'+str(Card.snowFlakeCount)] = SnowFlake(self, 2)
+        for _ in range(randSnowFlakes):
+            Card.snowFlakeCount += 1 
+            self.gameObjects['snowflake'+str(Card.snowFlakeCount)] = SnowFlake(self, 1)
+
+
         for k, v in self.gameObjects.items():
             v.timeStep()
             self.screen.blit(v.surface, v.location)
@@ -62,5 +75,5 @@ class cardUI(object):
         sys.exit() 
 
 if __name__ == '__main__':
-    card = cardUI()
+    card = Card()
     card.mainLoop()
